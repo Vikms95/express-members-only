@@ -28,6 +28,7 @@ Message {
     :get user with the req method
     :add conditionals on the dashboard template so it shows a certain string if the user has the property status: 'member' on it
    -->
+  - Render all messages from database on the dashboard template
   - Give ability to users and admins to create a message through the create-message template form
     :when it is submitted, upload it to the database
     :everytime that a anyone loads the dashboard, show the messages
