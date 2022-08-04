@@ -23,11 +23,18 @@ Message {
 }
 
 - TODO
-  - Make a user become a member if they enter the right string on the become-member form POST method
+  <!-- - Make a user become a member if they enter the right string on the become-member form POST method
     :find the logged in user in the database, and add a property status: 'member' to it
-    :get user with the req method? req.currentUser??
+    :get user with the req method
     :add conditionals on the dashboard template so it shows a certain string if the user has the property status: 'member' on it
-
+   -->
+  - Give ability to users and admins to create a message through the create-message template form
+    :when it is submitted, upload it to the database
+    :everytime that a anyone loads the dashboard, show the messages
+    :if they are members
+      :give the ability to see usernames and timestamps, and delete their own messages
+    :if they are admins
+      :give the ability to delete all messages
 
 - QUESTIONS
   Should I store a messages array within the User model? Would it be a string or an id?
