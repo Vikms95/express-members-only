@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const userController = require('../controllers/userController')
+const messageController = require('../controllers/messageController')
 const passport = require('passport');
 const User = require('../models/User');
 require('dotenv').config()
@@ -70,7 +71,7 @@ router.get('/create-message', (req, res, next) => {
   res.render('create-message')
 })
 
-router.post('/create-message')
+router.post('/create-message', messageController.message_create_post)
 
 router.get('/logout', (req, res) => {
   req.logout(function(err) {
