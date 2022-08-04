@@ -22,5 +22,9 @@ Message {
   text: {type: String, required: true}
 }
 
+Library to validate that the password and password-confirm fields are equal custom validator
+https://express-validator.github.io/docs/validation-chain-api.html
+
+
 - QUESTIONS
   Should I store a messages array within the User model? Would it be a string or an id?
