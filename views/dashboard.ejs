@@ -14,12 +14,33 @@
       <br>
       <a href="/logout"> Logout</a>
     </header>
-    <% if(membership === 'member'){ %>
+
+    <% if(currentUser.membership === 'member'){ %>
       <h1>welcome member</h1>
-    <% } else if(membership === 'admin') { %>  
+    <% } else if(currentUser.membership === 'admin') { %>  
       <h1>welcome admin</h1>
-   <% } else { %>
+    <% } else { %>
       <h1>welcome user</h1>
-  <% } %>
+    <% } %>
+
+    <% if(messages.length > 0){ %>
+      <h1>Messages</h1>
+    <% } %>
+
+    <% for(let i = 0; i < messages.length; i++){ %>
+      <h2><%= messages[i].title %></h2>
+      <div><%= messages[i].text %></div>
+      
+      <% if(currentUser.membership){ %>
+        <div><%= messages[i].user.fullname %></div>
+        <div><%= messages[i].timestamp %></div>
+
+      <% } %>
+
+      <% if(messages[i].user._id.toString() === currentUser._id.toString() || currentUser.membership === 'admin'){ %>
+        <a href=<%= `/delete-message/${messages[i]._id}` %>>Delete message</a>
+      <% } %>
+
+    <% } %>
   </body>
 </html>

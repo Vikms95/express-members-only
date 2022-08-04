@@ -35,10 +35,11 @@ var app = express();
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
+const DEV_URI = 'mongodb+srv://vikms:ustdedt8@cluster0.uhrhj8a.mongodb.net/?retryWrites=true&w=majority'
 // setup passport
 app.use(session(
   {
-    secret:process.env.SECRET,
+    secret:process.env.SECRET || DEV_URI,
     resave:false,
     saveUninitialized: true,
   })
@@ -72,12 +73,6 @@ passport.deserializeUser(function(id, done) {
   })
 })
 app.use(passport.initialize())
-
-// make user available to all the app
-app.use(function(req, res, next) {
-  res.locals.currentUser = req.user
-  next()
-})
 app.use(passport.session())
 
 // setup application level middleware
@@ -86,6 +81,13 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+
+// make user available to all the app
+app.use(function(req, res, next) {
+  res.locals.currentUser = req.user
+  next()
+})
+
 
 // routes where router specific middleware and controllers are declared
 app.use('/', router);

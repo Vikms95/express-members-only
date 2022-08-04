@@ -4,6 +4,7 @@ const userController = require('../controllers/userController')
 const messageController = require('../controllers/messageController')
 const passport = require('passport');
 const User = require('../models/User');
+const Message = require('../models/Message');
 require('dotenv').config()
 
 router.get('/', function(req, res, next) {
@@ -22,9 +23,15 @@ router.post('/login', passport.authenticate('local', {
 }) )
 
 router.get('/dashboard', (req, res, next) => {
-  
   // Implement middleware to find all the messages to pass them down below
-  res.render('dashboard', {membership: req.user.membership})
+  Message
+    .find()
+    .populate('user')
+    .exec(function(err, messages){
+      if(err) return next(err)
+      res.locals.currentUser = req.user
+      res.render('dashboard', {messages: messages})
+    })
 })
 
 router.get('/create-member', (req, res, next) => {
@@ -74,6 +81,18 @@ router.get('/create-message', (req, res, next) => {
 })
 
 router.post('/create-message', messageController.message_create_post)
+
+router.get('/delete-message/:id', (req, res, next) => {
+  res.render('delete-message')
+})
+
+router.post('/delete-message/:id', (req, res, next) => {
+  Message
+    .findByIdAndDelete(req.params.id, function(err){
+      if(err) return next(err)
+      res.redirect('/dashboard')
+    })
+})
 
 router.get('/logout', (req, res) => {
   req.logout(function(err) {
