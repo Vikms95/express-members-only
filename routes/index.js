@@ -66,4 +66,19 @@ router.post('/create-admin', (req, res, next) => {
   }
 })
 
+router.get('/create-message', (req, res, next) => {
+  res.render('create-message')
+})
+
+router.post('/create-message')
+
+router.get('/logout', (req, res) => {
+  req.logout(function(err) {
+    if (err) {
+      return next(err)
+    }
+    res.redirect('/')
+  })
+})
+
 module.exports = router;
