@@ -22,8 +22,11 @@ Message {
   text: {type: String, required: true}
 }
 
-Library to validate that the password and password-confirm fields are equal custom validator
-https://express-validator.github.io/docs/validation-chain-api.html
+- TODO
+  - Make a user become a member if they enter the right string on the become-member form POST method
+    :find the logged in user in the database, and add a property status: 'member' to it
+    :get user with the req method? req.currentUser??
+    :add conditionals on the dashboard template so it shows a certain string if the user has the property status: 'member' on it
 
 
 - QUESTIONS

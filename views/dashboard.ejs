@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Dashboard</title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+    <header>
+      <a href="/create-message"> Create a message</a>
+      <br>
+      <a href="/create-member"> Become a VIP member</a>
+      <br>
+      <a href="/create-admin"> Become an admin</a>
+      <br>
+      <a href="/logout"> Logout</a>
+    </header>
+    <% if(membership === 'member'){ %>
+      <h1>welcome member</h1>
+    <% } else if(membership === 'admin') { %>  
+      <h1>welcome admin</h1>
+   <% } else { %>
+      <h1>welcome user</h1>
+  <% } %>
+  </body>
+</html>

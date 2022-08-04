@@ -29,10 +29,8 @@ exports.user_signup_post = [
   (req, res, next) => {
     const errors = validationResult(req)
     if(!errors.isEmpty()) {
-      console.log("errors!")
       res.render('index', {title:'Members Only', errors: errors.array()})
     } else {
-      console.log("no errors!")
       bcrypt.hash(req.body.password, 10, (err, hashedPassword) => {
         if(err) return next(err)
         const user = new User({
@@ -44,28 +42,6 @@ exports.user_signup_post = [
           res.redirect('/')
         })
       })
-    }
-  }
-]
-
-exports.user_login_post = [
-  body('username')
-    .exists()
-    .trim()
-    .isAlphanumeric()
-    .escape(),
-  body('password')
-    .exists(),
-
-  (req, res, next) => {
-    const errors = validationResult(req)
-    if(!errors.isEmpty()) {
-      console.log("errors on login!")
-      res.render('login', {title:'Members Only', errors: errors.array()})
-    } else {
-      console.log("no errors on login!")
-        // Use User model to find it on the database
-        // User.find({username: username})
     }
   }
 ]
