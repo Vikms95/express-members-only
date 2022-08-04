@@ -22,6 +22,7 @@ router.post('/login', passport.authenticate('local', {
 }) )
 
 router.get('/dashboard', (req, res, next) => {
+  
   // Implement middleware to find all the messages to pass them down below
   res.render('dashboard', {membership: req.user.membership})
 })

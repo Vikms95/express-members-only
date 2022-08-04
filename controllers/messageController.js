@@ -15,6 +15,7 @@ exports.message_create_post = [
     const message = new Message({
       user: req.user._id,
       title: req.body.title,
+      timestamp: Date.now().toString(),
       text: req.body.text
     })
 
