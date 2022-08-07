@@ -17,7 +17,6 @@ mongoose.connect(
   process.env.MONGODB_URI || DEV_URI,
   {
     useNewUrlParser: true,
-    useUnifiedTopology: true,
     useUnifiedTopology: true
   }
 ).then(console.log(proces.env.MONGODB_URI))
