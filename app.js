@@ -8,9 +8,7 @@ const session = require('express-session')
 const passport = require('passport')
 const LocalStrategy = require('passport-local').Strategy
 const bcrypt = require('bcryptjs')
-
 const mongoose = require('mongoose')
-
 require('dotenv').config()
 
 // Setup database
@@ -19,6 +17,7 @@ mongoose.connect(
   process.env.MONGODB_URI || DEV_URI,
   {
     useNewUrlParser: true,
+    useUnifiedTopology: true,
     useUnifiedTopology: true
   }
 ).then(console.log(proces.env.MONGODB_URI))
