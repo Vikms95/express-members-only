@@ -9,6 +9,8 @@ const passport = require('passport')
 const LocalStrategy = require('passport-local').Strategy
 const bcrypt = require('bcryptjs')
 const mongoose = require('mongoose')
+const compression = require('compression')
+const helmet = require('helmet')
 require('dotenv').config()
 
 // Setup database
@@ -19,10 +21,10 @@ mongoose.connect(
     useNewUrlParser: true,
     useUnifiedTopology: true
   }
-).then(console.log(proces.env.MONGODB_URI))
+).then(console.log(process.env.MONGODB_URI))
 const db = mongoose.connection
 db.on('error', console.error.bind(console, 'MongoDB connection error'))
-db.once('open', console.log('DB connected!'))
+db.once('open', () => console.log('DB connected!'))
 
 // Import routes
 var router = require('./routes/index');
@@ -75,6 +77,8 @@ app.use(passport.initialize())
 app.use(passport.session())
 
 // setup application level middleware
+app.use(compression())
+app.use(helmet())
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
