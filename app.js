@@ -24,6 +24,7 @@ mongoose.connect(
 ).then(console.log(proces.env.MONGODB_URI))
 const db = mongoose.connection
 db.on('error', console.error.bind(console, 'MongoDB connection error'))
+db.once('open', console.log('DB connected!'))
 
 // Import routes
 var router = require('./routes/index');
