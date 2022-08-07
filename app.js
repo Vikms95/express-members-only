@@ -20,7 +20,7 @@ mongoose.connect(
     useNewUrlParser: true,
     useUnifiedTopology: true
   }
-)
+).then(console.log(proces.env.MONGODB_URI))
 const db = mongoose.connection
 db.on('error', console.error.bind(console, 'MongoDB connection error'))
 
