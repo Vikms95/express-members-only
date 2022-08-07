@@ -14,8 +14,9 @@ const mongoose = require('mongoose')
 require('dotenv').config()
 
 // Setup database
+const DEV_URI = 'mongodb+srv://vikms:ustdedt8@cluster0.uhrhj8a.mongodb.net/?retryWrites=true&w=majority'
 mongoose.connect(
-  process.env.MONGODB_URI,
+  process.env.MONGODB_URI || DEV_URI,
   {
     useNewUrlParser: true,
     useUnifiedTopology: true
@@ -35,11 +36,10 @@ var app = express();
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
-const DEV_URI = 'mongodb+srv://vikms:ustdedt8@cluster0.uhrhj8a.mongodb.net/?retryWrites=true&w=majority'
 // setup passport
 app.use(session(
   {
-    secret:process.env.SECRET || DEV_URI,
+    secret:process.env.SECRET,
     resave:false,
     saveUninitialized: true,
   })
